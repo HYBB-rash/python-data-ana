@@ -12,8 +12,6 @@
 
 # %%
 
-from numpy.core.defchararray import index
-from numpy.core.numeric import indices
 import pandas as pd
 import numpy as np
 
@@ -377,5 +375,165 @@ values
 
 bins = [0, 0.2, 0.4, 0.6, 0.8, 1]
 pd.get_dummies(pd.cut(values, bins))
+
+# %%
+
+# %%
+
+val = 'a, b,   guido'
+val.split(',')
+
+# %%
+
+pieces = [x.strip() for x in val.split(',')]
+pieces
+
+# %%
+
+first, second, third = pieces
+first + '::' + second + '::' + third
+
+# %%
+
+'::'.join(pieces)
+
+# %%
+
+'guido' in val
+
+# %%
+
+val.index(',')
+
+# %%
+
+val.find(':')
+
+# %%
+
+# val.index(':')
+
+# %%
+
+val.count(',')
+
+# %%
+
+val.replace(',', '::')
+
+# %%
+
+val.replace(',', '')
+
+# %%
+
+import re
+
+# %%
+
+text = 'foo     bar\t baz    \tqux'
+re.split('\s+', text)
+
+# %%
+
+regex = re.compile('\s+')
+regex.split(text)
+
+# %%
+
+regex.findall(text)
+
+# %%
+
+text = """Dave dave@google.com
+Steve steve@gmail.com
+Rob rob@gmail.com
+Ryan ryan@yahoo.com
+"""
+pattern = r'[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}'
+regex = re.compile(pattern, flags=re.IGNORECASE)
+
+# %%
+
+regex.findall(text)
+
+# %%
+
+m = regex.search(text)
+m
+
+# %%
+
+text[m.start():m.end()]
+
+# %%
+
+print(regex.match(text))
+
+# %%
+
+print(regex.sub('READCTED', text))
+
+# %%
+
+pattern = r'([A-Z0-9._%+-]+)@([A-Z0-9.-]+)\.([A-Z]{2,4})'
+regex = re.compile(pattern, flags=re.IGNORECASE)
+
+# %%
+
+m = regex.match('wesm@bright.net')
+m.groups()
+
+# %%
+
+regex.findall(text)
+
+# %%
+
+print(regex.sub(r'Username: \1, Domain: \2, Suffix: \3', text))
+
+# %%
+
+data = {'Dave': 'dave@google.com', 'Steve': 'steve@gmail.com',
+        'Rob': 'rob@gmail.com', 'Wes': np.nan}
+data = pd.Series(data)
+data
+
+# %%
+
+data.isnull()
+
+# %%
+
+data.str.contains('gmail')
+
+# %%
+
+pattern
+
+# %%
+
+data.str.findall(pattern, flags=re.IGNORECASE)
+
+# %%
+
+matches = data.str.match(pattern, flags=re.IGNORECASE)
+matches
+
+# %%
+
+matches.str.get(1)
+
+# %%
+
+matches.str.get(1)
+
+# %%
+
+matches.str[0]
+
+# %%
+
+data.str[:5]
 
 # %%
